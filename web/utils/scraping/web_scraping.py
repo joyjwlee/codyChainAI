@@ -27,7 +27,7 @@ def generate_category_links():
 # returns an array of {"name":"fandom_name", "link":"fandom_link"} for all fandoms
 def get_all_fandoms():
     # init
-    dict = {}
+    arr = []
     all_fandoms_domains = generate_category_links()
 
     # loop through all domains
@@ -41,11 +41,11 @@ def get_all_fandoms():
         # loop through and return
         for i in all_top:
             div = str(i)
-            name = re.search(">(.*)<", div).group(1)
-            link = ao3_domain + re.search("href=\"(.*)\"", div).group(1)
-            dict[name] = link
+            fandom_name = re.search(">(.*)<", div).group(1)
+            fandom_link = ao3_domain + re.search("href=\"(.*)\"", div).group(1)
+            arr.append({"name": fandom_name, "link": fandom_link})
 
-    return dict
+    return arr
 
 # returns an array of {"name":"fandom_name", "link":"fandom_link"} for the top most written fandoms in each category
 def get_top_fandoms():
@@ -57,13 +57,13 @@ def get_top_fandoms():
     all_top = soup.select("ol.group a")
 
     # loop through and return
-    dict = {}
+    arr = []
     for i in all_top:
         div = str(i)
-        name = re.search(">(.*)<", div).group(1)
-        link = ao3_domain + re.search("href=\"(.*)\"", div).group(1)
-        dict[name] = link
-    return dict
+        fandom_name = re.search(">(.*)<", div).group(1)
+        fandom_link = ao3_domain + re.search("href=\"(.*)\"", div).group(1)
+        arr.append({"name": fandom_name, "link": fandom_link})
+    return arr
 
 # TODO: Week One deliverable ! it's to write a function that will populate fandoms.json
 # creates fandoms.json file in the json folder with all fandoms and top fandoms in the listed format: '*shoudln't return anything'
