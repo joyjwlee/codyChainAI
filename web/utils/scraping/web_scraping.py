@@ -82,9 +82,16 @@ def get_top_fandoms():
 #    ]
 # }
 def gen_fandom_json():
-    return
+    # init dict
+    dict = {}
+    top_fandoms = get_top_fandoms()
+    all_fandoms = get_all_fandoms()
+    dict["top"] = top_fandoms
+    dict["all"] = all_fandoms
 
+    # print to `fandoms.json`
+    json_object = json.dumps(dict, indent=4)
+    with open(JSON_PATH, "w") as outfile:
+        outfile.write(json_object)
 
-# gen_fandom_json() # <-- uncomment this and run the file to update or create fandoms.json
-
-print(get_all_fandoms())
+gen_fandom_json()
