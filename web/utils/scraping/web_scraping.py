@@ -24,12 +24,28 @@ def generate_category_links():
         all_categories[i] = ao3_domain + str(all_categories[i].attrs["href"])
     return all_categories
 
-# TODO:? a potential helper function, optional!
 # returns an array of {"name":"fandom_name", "link":"fandom_link"} for all fandoms
 def get_all_fandoms():
-    # all_fandoms_domain = generate_category_links()[0]
-    # print(all_fandoms_domain)
-    return None
+    # init
+    dict = {}
+    all_fandoms_domains = generate_category_links()
+
+    # loop through all domains
+    for domain in all_fandoms_domains:
+        # get site text
+        soup = BeautifulSoup(requests.get(domain).text)
+
+        # get all of the fanfic divs
+        all_top = soup.select("ol.group a")
+
+        # loop through and return
+        for i in all_top:
+            div = str(i)
+            name = re.search(">(.*)<", div).group(1)
+            link = ao3_domain + re.search("href=\"(.*)\"", div).group(1)
+            dict[name] = link
+
+    return dict
 
 # returns an array of {"name":"fandom_name", "link":"fandom_link"} for the top most written fandoms in each category
 def get_top_fandoms():
@@ -71,4 +87,4 @@ def gen_fandom_json():
 
 # gen_fandom_json() # <-- uncomment this and run the file to update or create fandoms.json
 
-print(get_top_fandoms())
+print(get_all_fandoms())
