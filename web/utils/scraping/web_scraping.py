@@ -65,7 +65,7 @@ def get_top_fandoms():
         arr.append({"name": fandom_name, "link": fandom_link})
     return arr
 
-# TODO: Week One deliverable ! it's to write a function that will populate fandoms.json
+# TODO: Week 1 deliverable: write a function that will populate fandoms.json
 # creates fandoms.json file in the json folder with all fandoms and top fandoms in the listed format: '*shoudln't return anything'
 # {
 #    "top":[

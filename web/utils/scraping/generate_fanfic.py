@@ -40,12 +40,12 @@ def get_link(ui_fandom):
 def is_language(fanfic, language):
     return
 
-# TODO: WEEK 2 Deliberable finish this functions! I have some very loose guide lines for you, feel free to follow them or start from scratch!
-# returns an array of two eleents: 1) an array of all the authors whose fanfiction we scraped; 2. specified {number} fanfics (or all fanfic availiable if the total fanfic is less than the number) of word range {min_length}to {max_length}
+# TODO: WEEK 2 deliberable: finish get_fanfic_info()
+# returns an array of two elements:
+#   1) an array of all the authors whose fanfiction we scraped
+#   2. specified {number} fanfics (or all fanfic availiable if the total fanfic is less than the number) of word range {min_length}to {max_length}
 # in {language} from the given {fandom} in an array of dicts where the dicts are the formatted fanfic traning data
 # hint: how can we use ao3's preexisting filtering system to help us out, and get us some of the fanfic that we want!
-
-
 def get_fanfic_info(fandom, number, language, min_length, max_length):
     counter = 0
     fanfics = []
@@ -91,8 +91,6 @@ def get_fanfic(fanfic_link):
 # TODO: WEEK 4(OPTIONAL) potential helper function!
 # creates a new fineTuned model, finetuned on {data}, that will be able to generate new fanfic from the specified {fandom}
 # returns the model id once the model is created (make sure you wait unti the model is created before you return the modelid)
-
-
 def create_fineTuned_model(fandom, data):
     # converting training data to a jsonl
     # upload jsonl file onto openAI systems
