@@ -1,3 +1,4 @@
+# imports
 from bs4 import BeautifulSoup
 from dotenv import load_dotenv
 import requests
@@ -17,16 +18,17 @@ import sys
 
 load_dotenv()
 
+# global variables
 ao3_domain = "https://archiveofourown.org"
 # openai.api_key = os.getenv("OPENAI_API_KEY") #uncomment whe we start using open ai
+NUM_TRAINING_FANFIC = 10
+JSON_PATH = "web/json"
 
-# NUM_TRAINING_FANFIC = 10 #can change for testing!
-# TODO: week 2 this is just a good global var to have, please use it
-JSON_PATH = "put path of json here"
 
-# a potential helper function for you to use -- also an exmaple of how to open and load jsons!
-# given a fandom <string>, it returns a link <string> for that fandom's fanfics
 def get_link(ui_fandom):
+    """potential helper function -- also an exmaple of how to open and load jsons!
+    given a fandom <string>, it returns a link <string> for that fandom's fanfics
+    """
     fandoms_json = open(f"{JSON_PATH}/fandoms.json")
     fandoms = json.load(fandoms_json)
     all_fandoms = fandoms["all"]
@@ -35,18 +37,25 @@ def get_link(ui_fandom):
         if fandom["name"] == ui_fandom:
             return fandom["link"]
 
-# TODO: WEEK 2 (OPTIONAL) potential helper function for get_fanfic_info
-# returns true if fanfic card {type beautiful soup} is in the given language <string>, false otherwise
+
 def is_language(fanfic, language):
+    """potential helper function for get_fanfic_info
+    returns true if fanfic card {type beautiful soup} is in the given language <string>, false otherwise
+    """
+    # TODO WEEK 2
     return
 
-# TODO: WEEK 2 deliberable: finish get_fanfic_info()
-# returns an array of two elements:
-#   1) an array of all the authors whose fanfiction we scraped
-#   2. specified {number} fanfics (or all fanfic availiable if the total fanfic is less than the number) of word range {min_length}to {max_length}
+# TODO: WEEK 2 deliberable: get_fanfic_info()
 # in {language} from the given {fandom} in an array of dicts where the dicts are the formatted fanfic traning data
 # hint: how can we use ao3's preexisting filtering system to help us out, and get us some of the fanfic that we want!
+
+
 def get_fanfic_info(fandom, number, language, min_length, max_length):
+    """returns an array of two elements:
+    1. an array of all the authors whose fanfiction we scraped
+    2. specified {number} fanfics (or all fanfic availiable if the total fanfic is less than the number) of word range {min_length}to {max_length}
+    TLDR: returns array of authors & formatted fine tuning data
+    """
     counter = 0
     fanfics = []
     authors = []
@@ -80,17 +89,23 @@ def get_fanfic_info(fandom, number, language, min_length, max_length):
 
 # TODO: WEEK 4 (OPTIONAL) potential helper function!
 # returns true if FineTuning the model of {model_id} is still running/processing, false once succeeded
+
+
 def still_running(model_id):
     return
 
 # TODO: WEEK 4 (OPTIONAL) potential helper function!
 # returns full fanfic text <string> given {fanfic_link} <string>
+
+
 def get_fanfic(fanfic_link):
     return
 
 # TODO: WEEK 4(OPTIONAL) potential helper function!
 # creates a new fineTuned model, finetuned on {data}, that will be able to generate new fanfic from the specified {fandom}
 # returns the model id once the model is created (make sure you wait unti the model is created before you return the modelid)
+
+
 def create_fineTuned_model(fandom, data):
     # converting training data to a jsonl
     # upload jsonl file onto openAI systems
@@ -115,6 +130,8 @@ def create_fineTuned_model(fandom, data):
 # make sure to update models.json to include the new fine tuned model (if you make a new one!)
 # before you return the fanfic may consider making slight format modifications
 #   (can include making sure it's not too explicit; making sure it doesn't end mid sentence etc. )
+
+
 def generate_fanfic(fandom, tags):
     Fanfic = {}
     return Fanfic
